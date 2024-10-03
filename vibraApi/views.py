@@ -8,9 +8,11 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def get_isvibra(request):
     global isvibra
-    global isvibra
-    if request.GET.get('vibra') == '1':
-        isvibra = True
+    if request.GET.get('vibra'):
+        if request.GET.get('vibra') == '1':
+            isvibra = True
+        else:
+            isvibra = False
+        return JsonResponse({'isvibra': isvibra})
     else:
-        isvibra = False
-    return JsonResponse({'isvibra': isvibra})
+        return JsonResponse({'isvibra': isvibra})
